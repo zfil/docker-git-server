@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -eu
+
+if [ $# -ne 1 ]; then
+	echo "You must provide at least and at most a repo name."
+	exit 128
+fi
+
+REPO=`echo $1 | sed -e 's/[^a-z0-9A-Z]//g'`
+REPO_PATH="/git-server/repos/${REPO}.git"
+
+if [ -x ${REPO_PATH} ]; then
+	echo "This repository exists!"
+	exit 128
+fi
+
+mkdir -p ${REPO_PATH}
+cd ${REPO_PATH}
+git init --bare
