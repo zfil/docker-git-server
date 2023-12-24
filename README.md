@@ -16,6 +16,7 @@ All you data are in a docker volume /git-server I recommend to bind mount it.
 ### Authentication
 
 Copy all the public keys you want to use in ~/git-server-data/client-keys/
+When you add or remove keys you don't need to restart the container it is taken in real time.
 
 ### How to create a new repo
 
@@ -28,3 +29,11 @@ For instance this is will create a new repository called test-repo
 Provided your repository is called test-repo
 
 	git clone ssh://git@yourserver:2222/git-server/repos/test-repo.git
+
+### Build
+
+You can use buildx to create multiplatform builds. Example for raspberry 3 and amd64:
+
+	docker buildx create --name multi --platform linux/amd64,linux/arm/v7
+	docker buildx build --builder multi --platform linux/amd64,linux/arm/v7 -t zfil/docker-git-server --push .
+	docker buildx rm multi
