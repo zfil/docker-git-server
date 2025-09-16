@@ -32,8 +32,8 @@ Provided your repository is called test-repo
 
 ### Build
 
-You can use buildx to create multiplatform builds. Example for raspberry 3 and amd64:
+You can use buildx to create multiplatform builds. Example for raspberry 5 and amd64:
 
-	docker buildx create --name multi --platform linux/amd64,linux/arm/v7
-	docker buildx build --builder multi --platform linux/amd64,linux/arm/v7 -t zfil/docker-git-server --push .
+	docker buildx create --name multi --platform linux/amd64,linux/arm64
+	docker buildx build --builder multi --platform linux/amd64,linux/arm64 -t zfil/docker-git-server --push .
 	docker buildx rm multi
